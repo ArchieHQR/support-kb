@@ -13,9 +13,10 @@ export default {
     mdsvex({ extensions: ['.svx'], layout: { runbook } }),
   ],
   kit: {
-    adapter: adapter({ pages: 'build', assets: 'build', strict: false }),
+    adapter: adapter({ pages: process.env.OUT ?? 'build', assets: process.env.OUT ?? 'build', strict: false }),
     alias: { '#lib': 'src/lib' },
     paths: { base: process.env.BASE_PATH ?? '' },
     prerender: { entries: ['*'], handleHttpError: 'warn' },
+    inlineStyleThreshold: Infinity,
   },
 };

@@ -34,3 +34,18 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## #4471, split (added 2026-10-20)
+
+#4471 was merged on subject lines and marked *known*. Read by tenant, form and body, it holds three issues:
+
+| ticket | issue |
+|---|---|
+| [#1](https://github.com/ArchieHQR/support-kb/issues/1) | shared parser reads day-first dates month first |
+| [#2](https://github.com/ArchieHQR/support-kb/issues/2) | booking-v3 form hint shows MM/DD/YYYY, the form reads day first |
+| [#3](https://github.com/ArchieHQR/support-kb/issues/3) | dates move back one day across time zones |
+
+- The page: [`src/routes/kb/incidents/4471-split/+page.svx`](src/routes/kb/incidents/4471-split/+page.svx), numbers from [`src/lib/kb/IssueSplit.svelte`](src/lib/kb/IssueSplit.svelte) and [`src/lib/kb/split.ts`](src/lib/kb/split.ts).
+- The page as the desk sees it: [`docs/kb/incidents/4471-split/index.html`](docs/kb/incidents/4471-split/index.html), live at https://archiehqr.github.io/support-kb/kb/incidents/4471-split/
+
+Build: `npm install && npm run build` (output in `build/`). For Pages: `OUT=docs BASE_PATH=/support-kb npm run build`.
