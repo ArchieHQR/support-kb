@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · three issues, not one'
+title: '#4471 · split by cause'
 owner: archie
 status: open
 reviewed: 2026-10-20
@@ -8,45 +8,48 @@ signature: 'v1.eyJzdWIiOiIxNzgiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhd
 ---
 
 <script>
-  import IssueSplit from '#lib/kb/IssueSplit.svelte';
   import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](../4471/) is marked **known**: one issue, one fix queued. The reports in it say
-otherwise. They were merged on the subject line alone ([decision 0001](../../decisions/0001-dedupe-by-subject/)),
-and a subject says how a date went wrong, not why. Read by tenant, form and body, the ticket holds
-three issues. Each one now has a ticket of its own.
+[#4471](../4471/) is marked **known**: one issue, one fix queued. The reports in it say otherwise.
+They were merged on the subject line alone ([decision 0001](../../decisions/0001-dedupe-by-subject/)),
+and a subject says how a date went wrong, not why. Read by tenant, booking form and body, the
+ticket holds more than one issue. Each one now has a ticket of its own.
 
 <Callout kind="warn">
-The queued parser fix closes only the first issue. The other two keep coming in after it ships.
+The queued parser fix closes only the parser issue. The form hint and the one-day moves keep coming in after it ships.
 </Callout>
 
-## The split
+## What #4471 holds
 
-<IssueSplit ticket={4471} />
+<CauseTable ticket={4471} />
+
+| ticket | issue | in the table above |
+|---|---|---|
+| [support-kb#1](https://github.com/ArchieHQR/support-kb/issues/1) | The shared parser reads day-first dates month first: day and month swap. | the `parser` row, less its one-day moves |
+| [support-kb#2](https://github.com/ArchieHQR/support-kb/issues/2) | The booking-v3 form prints `MM/DD/YYYY` under its date field and reads the date day first: dates typed as told swap. | the `hint` row, "no ticket of its own" until now |
+| [support-kb#3](https://github.com/ArchieHQR/support-kb/issues/3) | Dates move back one day across time zones: no swap. | the one-day moves footnoted under `parser` |
 
 ## How to tell them apart
 
 - **parser**: the tenant writes the day first, and the date came in by app, email or the
-  booking-v2 form. Both numbers are 12 or lower, and day and month swap: 7 April arrives as 4 July.
-- **hint**: the same swap, but only through the **booking-v3** form. That form prints `MM/DD/YYYY`
-  under the date field and then reads the date day first. People type what the hint tells them.
-  Fixing the parser leaves this as it is: the form has to print the order it reads.
-- **shift**: no swap. The date moves back one day (Tuesday becomes Monday), or recipients in two
-  time zones see two different days. The desk already noted these as one-day moves. They are a
-  time zone bug, not a date-order bug.
+  booking-v2 form. Day and month swap: 7 April arrives as 4 July.
+- **hint**: the same swap, but only through the **booking-v3** form. People type what its hint
+  tells them, month first, and the form reads it day first. Fixing the parser leaves this as it
+  is: the form has to print the order it reads.
+- **one-day move**: no swap. The date moves back one day (Tuesday becomes Monday), or recipients
+  in two time zones see two different days. The desk noted these already (`desk-notes.json`), but
+  they are filed under parser by tenant. They are a time zone bug, not a date-order bug.
 
-Intake tags each report from the reporter's browser. The tag is a guess. The tenant's locale and
-booking form decide the cause, so triage by the tenant.
+Intake tags each report from the reporter's browser. The tag is a guess, and the "tagged as"
+column shows how often it misses. The tenant's locale and booking form decide the cause.
 
-## What the kb shows today
+## Since April
 
-The table on the #4471 page already flags the hint group as "no ticket of its own" and footnotes
-the one-day moves under parser. For comparison:
-
-<CauseTable ticket={4471} />
+<QueueTimeline ticket={4471} />
 
 ## Lessons
 
