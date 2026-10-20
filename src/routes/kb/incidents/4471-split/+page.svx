@@ -20,18 +20,18 @@ and a subject says how a date went wrong, not why. Read by tenant, booking form 
 ticket holds more than one issue. Each one now has a ticket of its own.
 
 <Callout kind="warn">
-The queued parser fix closes only the parser issue. The form hint and the one-day moves keep coming in after it ships.
+Engineering closed #4471 on 5 October: parser **fixed** (`fix(dates): parse dd/mm for eu locales`), hint **won't fix** (the booking-v3 form is retired). Neither touches the one-day moves. They are still open.
 </Callout>
 
 ## What #4471 holds
 
 <CauseTable ticket={4471} />
 
-| ticket | issue | in the table above |
-|---|---|---|
-| [support-kb#1](https://github.com/ArchieHQR/support-kb/issues/1) | The shared parser reads day-first dates month first: day and month swap. | the `parser` row, as the desk counts it |
-| [support-kb#2](https://github.com/ArchieHQR/support-kb/issues/2) | The booking-v3 form prints `MM/DD/YYYY` under its date field and reads the date day first: dates typed as told swap. | the `hint` row, "no ticket of its own" until now |
-| [support-kb#3](https://github.com/ArchieHQR/support-kb/issues/3) | Dates move back one day across time zones: no swap. | the one-day moves footnoted under `parser`, counted in that row where they are filed |
+| ticket | issue | in the table above | state |
+|---|---|---|---|
+| [support-kb#1](https://github.com/ArchieHQR/support-kb/issues/1) | The shared parser reads day-first dates month first: day and month swap. | the `parser` row, as the desk counts it | closed: fixed |
+| [support-kb#2](https://github.com/ArchieHQR/support-kb/issues/2) | The booking-v3 form prints `MM/DD/YYYY` under its date field and reads the date day first: dates typed as told swap. | the `hint` row, "no ticket of its own" until now | closed: won't fix, form retired |
+| [support-kb#3](https://github.com/ArchieHQR/support-kb/issues/3) | Dates move back one day across time zones: no swap. | the one-day moves footnoted under `parser`, counted in that row where they are filed | **open** |
 
 ## How to tell them apart
 
