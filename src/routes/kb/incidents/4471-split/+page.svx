@@ -29,9 +29,9 @@ The queued parser fix closes only the parser issue. The form hint and the one-da
 
 | ticket | issue | in the table above |
 |---|---|---|
-| [support-kb#1](https://github.com/ArchieHQR/support-kb/issues/1) | The shared parser reads day-first dates month first: day and month swap. | the `parser` row, less its one-day moves |
+| [support-kb#1](https://github.com/ArchieHQR/support-kb/issues/1) | The shared parser reads day-first dates month first: day and month swap. | the `parser` row, as the desk counts it |
 | [support-kb#2](https://github.com/ArchieHQR/support-kb/issues/2) | The booking-v3 form prints `MM/DD/YYYY` under its date field and reads the date day first: dates typed as told swap. | the `hint` row, "no ticket of its own" until now |
-| [support-kb#3](https://github.com/ArchieHQR/support-kb/issues/3) | Dates move back one day across time zones: no swap. | the one-day moves footnoted under `parser` |
+| [support-kb#3](https://github.com/ArchieHQR/support-kb/issues/3) | Dates move back one day across time zones: no swap. | the one-day moves footnoted under `parser`, counted in that row where they are filed |
 
 ## How to tell them apart
 
